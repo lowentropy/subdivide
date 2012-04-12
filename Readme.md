@@ -11,3 +11,5 @@ Usage
         -s, --subdivisions num           Number of subdivions (default = 3)
         -o, --output out.obj             Output location (or - for stdout)
         -c, --check                      Check sanity
+        -v, --verbose                    Print verbose statistics
+

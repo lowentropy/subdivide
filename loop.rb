@@ -23,6 +23,8 @@ def main options
       f.puts surface.to_obj
     end
   end
+  
+  puts surface.stats if options[:verbose]
 end
 
 main get_options if __FILE__ == $0
