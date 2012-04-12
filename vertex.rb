@@ -2,6 +2,18 @@ require 'ext'
 
 include Math
 
+BETA = {}
+def loop_beta n
+  BETA[n] ||= begin
+    if n == 3
+      3.0 / 16
+    else
+      #3.0 / (8 * n)
+      (1.0 / n) * (0.625 - (0.375 + 0.25 * cos(2 * PI / n)) ** 2)
+    end
+  end
+end
+
 class Vertex
   attr_accessor :x, :y, :z, :edges, :index
   def initialize coords
@@ -32,18 +44,8 @@ class Vertex
       others = edges.map { |edge| edge.other_vertex self }.uniq
       k = others.size
       n = k + 1
-      b = beta n
+      b = loop_beta n
       others.sum * b + self * (1 - k * b)
-    end
-  end
-  def beta n
-    (@beta ||= {})[n] ||= begin
-      if n == 3
-        3.0 / 16
-      else
-        #3.0 / (8 * n)
-        (1.0 / n) * (0.625 - (0.375 + 0.25 * cos(2 * PI / n)) ** 2)
-      end
     end
   end
   def boundary_vertices
