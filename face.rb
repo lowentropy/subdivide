@@ -14,9 +14,7 @@ class Face
     faces.unshift face
   end
   def circle!
-    [[0,1], [1,2], [2,0]].each do |(i,j)|
-      edges[i]._next = edges[j]
-    end
+    0.upto(2) { |i| edges[i]._next = edges[(i+1)%3] }
   end
   def assert_sanity
     0.upto(2) do |i|
